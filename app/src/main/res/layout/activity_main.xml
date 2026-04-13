@@ -13,11 +13,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SokoGarden"
+        android:text="❇️ SokoGarden ❇️"
         android:textSize="38sp"
         android:textAlignment="center"
         android:textStyle="bold|italic"
         android:textColor="#000000"
+        android:fontFamily="cursive"
         android:background="@drawable/shape"/>
 <!--Below`is a linear layout that aligns contents horizontally    -->
     <LinearLayout
@@ -28,25 +29,25 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signup"
+            android:text="👤 Signup"
             android:textSize="25sp"
             android:padding="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:textColor="#BDBDBD"
-            android:backgroundTint="#546E7A"
+            android:textColor="#0A2CE7"
+            android:backgroundTint="#9505F6E2"
             android:id="@+id/signupBtn"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signin"
+            android:text="👮🏽 Signin"
             android:textSize="25sp"
             android:padding="10dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="8dp"
-            android:textColor="#BDBDBD"
-            android:backgroundTint="#546E7A"
+            android:textColor="#0A2CE7"
+            android:backgroundTint="#9505F6E2"
             android:id="@+id/signinBtn"/>
     </LinearLayout>
 
