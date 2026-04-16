@@ -1,10 +1,16 @@
 package com.example.sokogarden
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.loopj.android.http.RequestParams
 
 class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +22,53 @@ class PaymentActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+//        Find all the views by use of their ids
+        val txtname = findViewById<TextView>(R.id.txtProductName)
+        val textcost = findViewById<TextView>(R.id.txtProductCost)
+        val imgProduct = findViewById<ImageView>(R.id.imgProduct)
+
+//        Retrieve the data passed from the previous Activity(MainActivity)
+        val name = intent.getStringExtra("product_name")
+        val cost = intent.getIntExtra("product_cost", 0)
+        val product_photo = intent.getStringExtra("product_photo")
+
+//        Update the textview with the data passed from the previous Activity
+        txtname.text = name
+        textcost.text = "Kes $cost"
+
+//        Specify the image URL
+        val imageUrl = "https://brayemar.alwaysdata.net/static/images/$product_photo"
+
+        Glide.with(this)
+            .load(imageUrl )
+            .placeholder(R.drawable.ic_launcher_background) // Make sure you have a placeholder image
+            .into(imgProduct)
+
+//        Find all the EditText and the Pay now btton by use of their ids
+        val phone = findViewById<EditText>(R.id.phone)
+        val btnPay = findViewById<Button>(R.id.pay)
+
+//        Set onclicklistener on the button
+        btnPay.setOnClickListener {
+//            Specify the api endpoint for making payment
+            val api = "https://brayemar.alwaysdata.net/api/mpesa_payment"
+
+//            Create a requestParams
+            val  data = RequestParams()
+
+//            Insert data into the RequestParams
+            data.put("amount",cost)
+            data.put("phone", phone)
+
+//            Import the helper class
+            val helper = ApiHelper(applicationContext)
+
+//            access the post function inside of the helper class
+            helper.post(api, data)
+
+//             Clear the phone number from the edittext
+            phone.text.clear()
+        }
+
     }
 }
